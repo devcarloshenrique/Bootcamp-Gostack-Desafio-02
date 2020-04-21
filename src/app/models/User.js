@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 class User extends Model {
   // Metodo chamado automatica mente pelo sequelize
   static init(sequelize) {
-    // Metodo init está sendo chamado da class Model
+    // Metodo init está sendo chamado da class Model == Model.init()
     super.init(
       {
         // Colunas do BD que serão inseridas pelo usuario.
@@ -27,6 +27,10 @@ class User extends Model {
     });
 
     return this;
+  }
+
+  checkPassword(password) {
+    return bcrypt.compare(password, this.password_hash);
   }
 }
 
